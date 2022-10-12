@@ -1,5 +1,5 @@
 {
-  "name": "my-app",
+  "name": "cocktail-counter",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -15,6 +15,9 @@
   },
   "dependencies": {
     "@vitejs/plugin-legacy": "^2.2.0",
-    "audioContext-polyfill": "github:shinnn/AudioContext-Polyfill"
+    "audioContext-polyfill": "github:shinnn/AudioContext-Polyfill",
+    "express": "^4.18.2",
+    "sass": "^1.55.0",
+    "svelte-preprocess": "^4.10.7"
   }
 }
