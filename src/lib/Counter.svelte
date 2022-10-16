@@ -1,5 +1,6 @@
 <script>
-  export let counter_name = "unknown";
+  export let name = "unknown";
+  $: url_name = name.replaceAll(' ', '-');
 
   // @ts-ignore-next-line
   const audioCtx = new (window.AudioContext || window.webkitAudioContext)
@@ -19,14 +20,14 @@
     apicall.responseType = "json";
     apicall.onreadystatechange = () => {
       if(apicall.readyState == 4 && apicall.status == 200) {
-        count = apicall.response[counter_name];
+        count = apicall.response[url_name];
       }
     }
-    apicall.open("GET", "/api/counter/" + counter_name);
+    apicall.open("GET", "/api/counter/" + url_name);
     apicall.send();
   }
   let refresh_timer = setInterval(refreshCount, REFRESH_INTERVAL);
-  refreshCount();
+  setTimeout(refreshCount, 0);
 
   const req = new XMLHttpRequest();
   req.addEventListener("load", reqListener);
@@ -53,10 +54,10 @@
     apicall.responseType = "json";
     apicall.onreadystatechange = () => {
       if(apicall.readyState == 4 && apicall.status == 200) {
-        count = apicall.response[counter_name];
+        count = apicall.response[url_name];
       }
     }
-    apicall.open("POST", "/api/counter/" + counter_name);
+    apicall.open("POST", "/api/counter/" + url_name);
     apicall.send();
 
     setTimeout(() => {
@@ -69,16 +70,23 @@
 </script>
 
 <button on:touchstart={increment} on:click={increment}>
-  <p>{counter_name}</p>
-  <img src="/img/cocktails/{counter_name}.jpg" alt="{counter_name} pic">
+  <h2>{name}</h2>
+  <img src="/img/cocktails/{url_name}.jpg" alt="{name} pic">
   <p>{count}</p>
 </button>
 
 <style lang="scss">
 button {
+  width: 220px;
   img {
     display: block;
-    width: 200px;
+    max-width: 200px;
+    max-height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  h2 {
+    text-transform: capitalize;
   }
 }
 </style>
