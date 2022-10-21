@@ -50,11 +50,12 @@ app.post('/api/counter/:name', async (req, res) => {
     const ctx = await ensure_open_file(req.params.name)
     ctx.f.write((new Date()).getTime() + "\n")
     ctx.count += 1;
+    res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify({
         [req.params.name]: ctx.count
     }));
 })
 
 app.listen(50000, () =>
-    console.log('Example app listening on port 3000!'),
+    console.log('Example app listening on port 50000!'),
 );
