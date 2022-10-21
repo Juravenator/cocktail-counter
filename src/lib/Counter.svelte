@@ -69,21 +69,45 @@
   }
 </script>
 
-<button on:touchstart={increment} on:click={increment}>
-  <h2>{name}</h2>
-  <img src="/img/cocktails/{url_name}.jpg" alt="{name} pic">
+<div button on:touchstart={increment} on:click={increment}>
+  <div title>
+    <h2>{name}</h2>
+  </div>
+  <div img>
+    <img src="/img/cocktails/{url_name}.jpg" alt="{name} pic">
+  </div>
   <p>{count}</p>
-</button>
+</div>
 
 <style lang="scss">
-button {
+[button] {
   width: 220px;
-  img {
-    display: block;
-    max-width: 200px;
-    max-height: 200px;
+  // display: table;
+  height: 320px;
+  // display: block;
+  // height: 50px;
+  display: inline-block;
+  background-color: rgb(213, 155, 48);
+  color: black;
+  text-align: center;
+  margin-bottom: 10px;
+
+  & > div[title] {
+    height: 53px; // 2*line-height + 5px
+  }
+
+  & > div[img] {
+    width: 200px;
+    height: 200px;
     margin-left: auto;
     margin-right: auto;
+    img {
+      display: block;
+      max-width: 200px;
+      max-height: 200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
   }
   h2 {
     text-transform: capitalize;
